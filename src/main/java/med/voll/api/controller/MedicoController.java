@@ -22,10 +22,10 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarMedico(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) { //REQUEST BODY PEGA O CORPO DA REQUISIÇÃO E NÃO UMA STRING JSON
-        var medico
-        repository.save(new Medico(dados));//instanciando um Medico usando dto
-        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand();
-        return ResponseEntity.created(uri).body(dto);
+        var medico = new Medico(dados);
+        repository.save(medico);//instanciando um Medico usando dto
+        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
     }
 
     @GetMapping
