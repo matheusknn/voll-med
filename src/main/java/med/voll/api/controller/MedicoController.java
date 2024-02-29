@@ -54,4 +54,10 @@ public class MedicoController {
     }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity detalhaarMedico(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));//requisições delete não retornam conteúdo
+    }
+
 }
