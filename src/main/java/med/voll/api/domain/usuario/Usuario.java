@@ -30,6 +30,10 @@ public class Usuario implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    public String getLogin() {
+        return login;
+    }
+
     @Override
     public String getPassword() {
         return senha;
